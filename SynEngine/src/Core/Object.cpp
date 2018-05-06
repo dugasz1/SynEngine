@@ -2,6 +2,7 @@
 
 SynEngine::Object::Object()
 {
+	rootNode = new Node<Mesh*>();
 }
 
 SynEngine::Object::~Object()

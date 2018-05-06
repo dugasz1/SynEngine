@@ -2,6 +2,7 @@
 
 SynEngine::Mesh::Mesh()
 {
+	
 }
 
 SynEngine::Mesh::~Mesh()

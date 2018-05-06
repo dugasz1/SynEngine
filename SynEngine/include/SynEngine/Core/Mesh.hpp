@@ -3,6 +3,7 @@
 #include "Material.hpp"
 #include "glm\glm.hpp"
 #include <vector>
+#include <string>
 
 namespace SynEngine {
 	struct Face
@@ -17,6 +18,8 @@ namespace SynEngine {
 	class Mesh
 	{
 	public:
+		std::string name;
+
 		Vec3* vertices;
 		///Number of vertices, not number of faces
 		unsigned int verticesCount;

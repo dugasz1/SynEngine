@@ -220,6 +220,7 @@
   <ItemGroup>
     <ClCompile Include="src\Core\Material.cpp" />
     <ClCompile Include="src\Core\Mesh.cpp" />
+    <ClCompile Include="src\Core\Node.cpp" />
     <ClCompile Include="src\Core\Object.cpp" />
     <ClCompile Include="src\Core\Shader.cpp" />
     <ClCompile Include="src\Core\ShaderProgram.cpp" />
@@ -242,6 +243,7 @@
   <ItemGroup>
     <ClInclude Include="include\SynEngine\Core\Material.hpp" />
     <ClInclude Include="include\SynEngine\Core\Mesh.hpp" />
+    <ClInclude Include="include\SynEngine\Core\Node.hpp" />
     <ClInclude Include="include\SynEngine\Core\Object.hpp" />
     <ClInclude Include="include\SynEngine\Core\Shader.hpp" />
     <ClInclude Include="include\SynEngine\Core\ShaderProgram.hpp" />

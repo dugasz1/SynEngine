@@ -24,14 +24,42 @@ SynEngine::Object * SynEngine::ObjectManager::LoadObject(std::string path, unsig
 	printf("Number of meshes: %u\n", scene->mNumMeshes);
 	printf("Number of materials: %u\n", scene->mNumMaterials);
 	printf("Hierarchy count: %u\n", scene->mRootNode->mNumChildren);
+	std::cout << scene->mRootNode->mTransformation.IsIdentity() << std::endl;
 	
-	for (size_t i = 0; i < scene->mNumMeshes; i++)
-	{
-		SynEngine::Mesh* mesh = LoadMesh(scene->mMeshes[i], scene->mMaterials, path);
-		obj->AddMesh(mesh);
-	}
+	ProcessHierarchy(scene, obj, path);
 
 	return obj;
+}
+
+void SynEngine::ObjectManager::ProcessHierarchy(const aiScene * scene, Object* obj, std::string& path)
+{
+	if (scene->mRootNode->mNumChildren != 0) {
+		ProcessHierarchyRecursively(obj->rootNode, obj, scene->mRootNode, scene, path);
+	}
+	else {
+		printf("Warning %s obj has no children", path.c_str());
+	}
+}
+
+void SynEngine::ObjectManager::ProcessHierarchyRecursively(Node<Mesh*>* parentNode, Object* obj, aiNode * node, const aiScene* scene, std::string& path)
+{
+	
+	for (size_t i = 0; i < node->mNumMeshes; i++)
+	{
+		Mesh* synMesh = LoadMesh(scene->mMeshes[node->mMeshes[i]], scene->mMaterials, path);
+		obj->AddMesh(synMesh);
+		parentNode->AddElement(synMesh);
+	}
+
+	if (node->mNumChildren > 0) {
+		for (size_t i = 0; i < node->mNumChildren; i++)
+		{
+			Node<Mesh*>* childNode = new Node<Mesh*> ();
+			parentNode->children.push_back(childNode);
+			ProcessHierarchyRecursively(childNode, obj, node->mChildren[i], scene, path);
+		}
+	}
+
 }
 
 SynEngine::Mesh * SynEngine::ObjectManager::LoadMesh(aiMesh * mesh, aiMaterial** materials, std::string& filePathString)

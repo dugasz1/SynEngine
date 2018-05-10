@@ -4,21 +4,15 @@
 #include <glm\gtc\matrix_transform.hpp>
 #include <glm\gtc\type_ptr.hpp>
 #include <thread>
-#include <Windows.h>
 
 int main() {
-	WCHAR path[MAX_PATH];
-	GetModuleFileNameW(NULL, path, MAX_PATH);
-
-	printf("%ls\n", path);
-
 	//SynEngine::Engine::Init();
 	SynEngine::Engine engine;
 
 	SynEngine::Debug debuger;
 
 	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-	SynEngine::Object* o = SynEngine::Engine::objectManager->LoadObject("B:\\Szakdoga\\SynEngine\\Test\\models\\threecube\\threecube.dae");
+	SynEngine::Object* o = SynEngine::Engine::objectManager->LoadObject("..\\Test\\models\\threecube\\threecube.dae");
 
 	SynEngine::Engine::renderManager->dr->AddObject(o);
 

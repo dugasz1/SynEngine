@@ -1,8 +1,8 @@
-##SynEngine
+## SynEngine
 
 Graphical engine for university degree thesis.
 
-##Dependencies:
+## Dependencies:
 
 - [Assimp 4.1.0](https://github.com/assimp/assimp)
 - [DevIL 1.8.0](http://openil.sourceforge.net/download.php)

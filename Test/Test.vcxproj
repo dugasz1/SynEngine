@@ -121,12 +121,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\glew-2.1.0\include;B:\Szakdoga\DevIL-1.8.0\DevIL\include;B:\Szakdoga\glfw-3.2.1.bin.WIN64\include;B:\Szakdoga\lua-5.3.4\src;B:\Szakdoga\assimp-4.1.0\include;B:\Szakdoga\glm\include;$(SolutionDir)SynEngine\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\vendor\glew-2.1.0\include;$(SolutionDir)..\vendor\DevIL Windows SDK\include;$(SolutionDir)..\vendor\glfw-3.2.1.bin.WIN64\include;$(SolutionDir)..\vendor\lua-5.3.4\src;$(SolutionDir)..\vendor\assimp-4.1.0\include;$(SolutionDir)..\vendor\glm\include;$(SolutionDir)SynEngine\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>B:\Szakdoga\glew-2.1.0\lib\Release\x64;B:\Szakdoga\DevIL Windows SDK\lib\x64\Release;B:\Szakdoga\glfw-3.2.1.bin.WIN64\lib-vc2015;B:\Szakdoga\lua-5.3.4\Lua\x64\Debug;B:\Szakdoga\assimp-4.1.0\build\code\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\vendor\glew-2.1.0\lib\Release\x64;$(SolutionDir)..\vendor\DevIL Windows SDK\lib\x64\Release;$(SolutionDir)..\vendor\glfw-3.2.1.bin.WIN64\lib-vc2015;$(SolutionDir)..\vendor\lua-5.3.4\lib\x64\Debug;$(SolutionDir)..\vendor\assimp-4.1.0\build\code\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glew32.lib;opengl32.lib;assimp-vc150-mt.lib;Lua.lib;glfw3.lib;DevIL.lib;ILU.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

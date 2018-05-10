@@ -27,7 +27,7 @@ namespace SynEngine {
 
 	template<class T>
 	SynEngine::Node<T>::Node() {
-		parent == nullptr;
+		parent = nullptr;
 	}
 
 	template<class T>

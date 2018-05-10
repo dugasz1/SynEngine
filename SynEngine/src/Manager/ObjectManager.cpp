@@ -1,5 +1,7 @@
 #include "../../include/SynEngine/Managers/ObjectManager.hpp"
 #include "../../include/SynEngine/Engine.hpp"
+#include "../../include/SynEngine/Util/CommonDefs.hpp"
+#include <Windows.h>
 
 SynEngine::ObjectManager::ObjectManager()
 {
@@ -12,7 +14,16 @@ SynEngine::ObjectManager::~ObjectManager()
 
 SynEngine::Object * SynEngine::ObjectManager::LoadObject(std::string path, unsigned int flags)
 {
-	const aiScene* scene = aImporter.ReadFile(path, flags);
+	//Converting char to wchar to resolve relative path, then back for assimp.
+	std::wstring wStringPath(path.begin(), path.end());
+	const wchar_t* wPath = wStringPath.c_str();
+	wchar_t fullPath[MAX_PATH];
+	GetFullPathNameW(wPath, MAX_PATH, fullPath, NULL);
+	char* fullPathC = new char[MAX_PATH];
+	std::wcstombs(fullPathC, fullPath, MAX_PATH);
+
+	printf("Loading object at: %ls\n", fullPath);
+	const aiScene* scene = aImporter.ReadFile(fullPathC, flags);
 	if (scene == nullptr) {
 		SynEngine::Engine::log->Error(aImporter.GetErrorString());
 		return nullptr;

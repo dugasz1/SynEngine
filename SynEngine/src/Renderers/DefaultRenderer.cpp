@@ -1,21 +1,47 @@
 #include "..\..\include\SynEngine\Renderers\DefaultRenderer.hpp"
+#include "glm/glm.hpp"
+#include "glm/gtc/type_ptr.hpp"
 
 SynEngine::DefaultRenderer::DefaultRenderer()
 {
-	//Engine::shaderProgramManager->LoadShaderProgram("B:/", "default");
+	ShaderProgram* sp = Engine::I->shaderProgramManager->LoadShaderProgram("..\\Test\\shaders", "default");
+
+	SynEngine::DefaultRenderer::projectionMatrixId = sp->LocateUniform("projectionMatrix");
+
+	viewMatrixId = sp->LocateUniform("viewMatrix");
+
+	meshMatrixId = sp->LocateUniform("meshMatrix");
+
+	textureSamplerId = sp->LocateUniform("texture_sampler");
+
+	glUseProgram(sp->id);
 }
 
 SynEngine::DefaultRenderer::~DefaultRenderer()
 {
 }
 
+void SynEngine::DefaultRenderer::Init()
+{
+
+}
+
 void SynEngine::DefaultRenderer::Draw()
 {
+	const Window window = Engine::I->GetWindow();
+	const Mat4 projectionM = window.GetProjectionMatrix();
+	glUniformMatrix4fv(projectionMatrixId, 1, false, glm::value_ptr(projectionM));
+	glUniformMatrix4fv(viewMatrixId, 1, false, glm::value_ptr(Engine::I->camera.GetViewMatrix()));
+
 	for (std::vector<Object*>::iterator objIt = objects.begin(); objIt != objects.end(); objIt++)
 	{		
 		for (std::vector<Mesh*>::iterator it = (*objIt)->begin(); it != (*objIt)->end(); it++)
 		{
+			glUniformMatrix4fv(meshMatrixId, 1, false, glm::value_ptr((*it)->transformation));
 			//printf("%u", (*it)->vao);
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, (*it)->material.texture->id);
+
 			glBindVertexArray((*it)->vao);
 			glDrawElements(GL_TRIANGLES, (*it)->indicesCount, GL_UNSIGNED_INT, 0);
 		}

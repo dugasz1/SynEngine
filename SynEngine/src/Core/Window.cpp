@@ -1,10 +1,14 @@
 #include "../../include/SynEngine/Core/Window.hpp"
+#include "glm/glm.hpp"
+#include <glm\gtc\matrix_transform.hpp>
 
 SynEngine::Window::Window()
 {
 	glfwWindow = glfwCreateWindow(1280, 720, "Teszt", NULL, NULL);
 
 	glfwMakeContextCurrent(glfwWindow);
+
+	projectionMatrix = glm::perspective<float>(glm::radians(90.0f), (1280.0f / 720.0f), 0.1f, 100.f);
 }
 
 SynEngine::Window::~Window()
@@ -40,4 +44,9 @@ bool SynEngine::Window::GetWindowShouldClose()
 void SynEngine::Window::SetWindowShouldClose(int value)
 {
 	glfwSetWindowShouldClose(glfwWindow, value);
+}
+
+const SynEngine::Mat4 & SynEngine::Window::GetProjectionMatrix() const
+{
+	return projectionMatrix;
 }

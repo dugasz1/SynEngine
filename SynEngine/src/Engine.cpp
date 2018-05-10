@@ -19,6 +19,10 @@ SynEngine::Engine::Engine()
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	/*SynEngine::Camera SynEngine::Engine::camera;*/
+
+
 }
 
 SynEngine::Engine::~Engine()
@@ -39,6 +43,11 @@ void SynEngine::Engine::MainLoop()
 	tick++;
 }
 
+const SynEngine::Window & SynEngine::Engine::GetWindow()
+{
+	return window;
+}
+
 const std::chrono::microseconds & SynEngine::Engine::GetTime()
 {
 	// TODO: insert return statement here
@@ -50,16 +59,25 @@ const std::uint64_t& SynEngine::Engine::GetTick()
 	return tick;
 }
 
-bool SynEngine::Engine::Init()
+void SynEngine::Engine::Init()
 {
-	//return SynEngine::Window::Init();
-	return true;
+	objectManager = new SynEngine::ObjectManager();
+	materialManager = new SynEngine::MaterialManager();
+	textureManager = new SynEngine::TexutreManager();
+	shaderManager = new SynEngine::ShaderManager();
+	shaderProgramManager = new SynEngine::ShaderProgramManager();
+	renderManager = new SynEngine::RenderManager();
+	log = new SynEngine::Log();
 }
 
-SynEngine::ObjectManager* SynEngine::Engine::objectManager = new SynEngine::ObjectManager();
-SynEngine::MaterialManager* SynEngine::Engine::materialManager = new SynEngine::MaterialManager();
-SynEngine::TexutreManager* SynEngine::Engine::textureManager = new SynEngine::TexutreManager();
-SynEngine::ShaderManager* SynEngine::Engine::shaderManager = new SynEngine::ShaderManager();
-SynEngine::ShaderProgramManager* SynEngine::Engine::shaderProgramManager = new SynEngine::ShaderProgramManager();
-SynEngine::RenderManager* SynEngine::Engine::renderManager = new SynEngine::RenderManager();
-SynEngine::Log* SynEngine::Engine::log = new SynEngine::Log();
+SynEngine::Engine* SynEngine::Engine::I = new SynEngine::Engine();
+
+//SynEngine::Camera SynEngine::Engine::camera;
+//
+//SynEngine::ObjectManager* SynEngine::Engine::objectManager = new SynEngine::ObjectManager();
+//SynEngine::MaterialManager* SynEngine::Engine::materialManager = new SynEngine::MaterialManager();
+//SynEngine::TexutreManager* SynEngine::Engine::textureManager = new SynEngine::TexutreManager();
+//SynEngine::ShaderManager* SynEngine::Engine::shaderManager = new SynEngine::ShaderManager();
+//SynEngine::ShaderProgramManager* SynEngine::Engine::shaderProgramManager = new SynEngine::ShaderProgramManager();
+//SynEngine::RenderManager* SynEngine::Engine::renderManager = new SynEngine::RenderManager();
+//SynEngine::Log* SynEngine::Engine::log = new SynEngine::Log();

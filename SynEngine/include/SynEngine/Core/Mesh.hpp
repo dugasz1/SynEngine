@@ -1,7 +1,8 @@
 #pragma once
 
 #include "Material.hpp"
-#include "glm\glm.hpp"
+#include "glm/glm.hpp"
+#include "../Util/CommonDefs.hpp"
 #include <vector>
 #include <string>
 
@@ -11,9 +12,6 @@ namespace SynEngine {
 		unsigned int numberOfIndices;
 		unsigned int* indices;
 	};
-
-	typedef glm::vec3 Vec3;
-	typedef glm::vec2 Vec2;
 
 	class Mesh
 	{
@@ -31,6 +29,8 @@ namespace SynEngine {
 		std::vector<Vec2*> uvMaps;
 
 		Material material;
+
+		Mat4 transformation;
 
 		//temp
 		GLuint vao;

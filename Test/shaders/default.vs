@@ -7,10 +7,10 @@ out vec2 outTexCoord;
 
 uniform mat4 viewMatrix;
 uniform mat4 projectionMatrix;
-uniform mat4 modelMatrix;
+uniform mat4 meshMatrix;
 
 void main()
 {
-    gl_Position = projectionMatrix * viewMatrix  * vec4(position, 1.0);
+    gl_Position = projectionMatrix * viewMatrix  * meshMatrix *vec4(position, 1.0);
     outTexCoord = texCoord;
 }

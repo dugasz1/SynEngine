@@ -24,8 +24,9 @@ namespace SynEngine {
 
 		SynEngine::Mesh* LoadMesh(aiMesh* mesh, aiMaterial** materials, std::string& filePathString);
 
+		void ProcessTransformationMatrix(aiMatrix4x4 * sourceMatrix, Mat4 * targetTransformation);
 		void ProcessHierarchy(const aiScene* scene, Object* obj, std::string& path);
-		void ProcessHierarchyRecursively(Node<Mesh*>* parentNode, Object* obj, aiNode* node, const aiScene* scene, std::string& path);
+		void ProcessHierarchyRecursively(Mat4 lastTranformationM, Node<Mesh*>* parentNode, Object* obj, aiNode* node, const aiScene* scene, std::string& path);
 		void ProcessFaces(Mesh* synMesh, aiFace* face, unsigned int facesCount);
 		void ProcessUVChannels(Mesh* synMesh, aiVector3D* textureCoords[AI_MAX_NUMBER_OF_TEXTURECOORDS], unsigned int tCoordCount);
 		void ProcessMaterials(Mesh* synMesh, aiMesh* mesh, aiMaterial** materials, std::string& filePathString);

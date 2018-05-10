@@ -25,7 +25,7 @@ SynEngine::ShaderProgram * SynEngine::ShaderProgramManager::LoadShaderProgram(st
 				std::string shaderName = shaderProgramName;
 				shaderName.append(it->second);
 				if (shaderName.compare(p.path().filename().string()) == 0) {
-					Shader* shader = Engine::shaderManager->LoadShader(p.path().string(), it->first);
+					Shader* shader = Engine::I->shaderManager->LoadShader(p.path().string(), it->first);
 					shaders.push_back(shader);
 				}
 			}

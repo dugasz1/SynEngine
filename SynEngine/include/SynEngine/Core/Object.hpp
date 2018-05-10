@@ -4,7 +4,8 @@
 #include <vector>
 #include "Mesh.hpp"
 #include "Node.hpp"
-#include "..\Util\CommonDefs.hpp"
+#include "../Util/CommonDefs.hpp"
+#include "glm/glm.hpp"
 
 namespace SynEngine {
 	class Object
@@ -20,6 +21,9 @@ namespace SynEngine {
 		std::vector<Mesh*>::iterator begin();
 		std::vector<Mesh*>::iterator end();
 
+		//Function will get it from root node
+		void SetTransformation();
+		void GetTransformation();
 	private:
 		
 		std::vector<Mesh*> meshes;

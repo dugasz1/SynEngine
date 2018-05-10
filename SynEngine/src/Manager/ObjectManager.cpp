@@ -25,7 +25,7 @@ SynEngine::Object * SynEngine::ObjectManager::LoadObject(std::string path, unsig
 	printf("Loading object at: %ls\n", fullPath);
 	const aiScene* scene = aImporter.ReadFile(fullPathC, flags);
 	if (scene == nullptr) {
-		SynEngine::Engine::log->Error(aImporter.GetErrorString());
+		SynEngine::Engine::I->log->Error(aImporter.GetErrorString());
 		return nullptr;
 	}
 
@@ -42,22 +42,40 @@ SynEngine::Object * SynEngine::ObjectManager::LoadObject(std::string path, unsig
 	return obj;
 }
 
+void SynEngine::ObjectManager::ProcessTransformationMatrix(aiMatrix4x4 * sourceMatrix, Mat4 * targetTransformation)
+{
+	float* src = (float*)sourceMatrix; //Row major
+	float* dst = (float*)targetTransformation; //Column major
+	for (size_t i = 0; i < 16; i++)
+	{
+		size_t rowJmp = i / 4;
+		size_t srcI = rowJmp + (i * 4) % 16;
+		dst[i] = src[srcI];
+	}
+}
+
 void SynEngine::ObjectManager::ProcessHierarchy(const aiScene * scene, Object* obj, std::string& path)
 {
 	if (scene->mRootNode->mNumChildren != 0) {
-		ProcessHierarchyRecursively(obj->rootNode, obj, scene->mRootNode, scene, path);
+		Mat4 identityMatrix; //Start with identity
+		ProcessHierarchyRecursively(identityMatrix, obj->rootNode, obj, scene->mRootNode, scene, path);
 	}
 	else {
 		printf("Warning %s obj has no children", path.c_str());
 	}
 }
 
-void SynEngine::ObjectManager::ProcessHierarchyRecursively(Node<Mesh*>* parentNode, Object* obj, aiNode * node, const aiScene* scene, std::string& path)
+void SynEngine::ObjectManager::ProcessHierarchyRecursively(Mat4 lastTranformationM, Node<Mesh*>* parentNode, Object* obj, aiNode * node, const aiScene* scene, std::string& path)
 {
-	
+	Mat4 nodeMatrix;
+	ProcessTransformationMatrix(&node->mTransformation, &nodeMatrix);
+	Mat4 currMatrix = lastTranformationM * nodeMatrix;
+	printf("--Number of meshed is in %s node: %u | Numof nodes: %u \n", node->mName.C_Str(), node->mNumMeshes, node->mNumChildren);
+
 	for (size_t i = 0; i < node->mNumMeshes; i++)
 	{
 		Mesh* synMesh = LoadMesh(scene->mMeshes[node->mMeshes[i]], scene->mMaterials, path);
+		synMesh->transformation = currMatrix;
 		obj->AddMesh(synMesh);
 		parentNode->AddElement(synMesh);
 	}
@@ -67,7 +85,7 @@ void SynEngine::ObjectManager::ProcessHierarchyRecursively(Node<Mesh*>* parentNo
 		{
 			Node<Mesh*>* childNode = new Node<Mesh*> ();
 			parentNode->children.push_back(childNode);
-			ProcessHierarchyRecursively(childNode, obj, node->mChildren[i], scene, path);
+			ProcessHierarchyRecursively(currMatrix, childNode, obj, node->mChildren[i], scene, path);
 		}
 	}
 
@@ -77,7 +95,7 @@ SynEngine::Mesh * SynEngine::ObjectManager::LoadMesh(aiMesh * mesh, aiMaterial**
 {
 	printf("UV channels: %u uv compinents: %u\n", mesh->GetNumUVChannels(), mesh->mNumUVComponents[0]);
 	
-	SynEngine::Engine::log->Info(mesh->mName.C_Str());
+	SynEngine::Engine::I->log->Info(mesh->mName.C_Str());
 	printf("Vertices count: %u\n", mesh->mNumVertices);
 
 	SynEngine::Mesh* synMesh = new SynEngine::Mesh();
@@ -161,7 +179,7 @@ void SynEngine::ObjectManager::ProcessMaterials(Mesh* synMesh, aiMesh* mesh, aiM
 		fs::path textureRelativePath(texturePathString.C_Str());
 		texturePath /= textureRelativePath;
 
-		Texture* texture = Engine::textureManager->LoadTexture(texturePath.string().c_str());
+		Texture* texture = Engine::I->textureManager->LoadTexture(texturePath.string().c_str());
 		texture->LoadTexture();
 
 		Material material(texture);

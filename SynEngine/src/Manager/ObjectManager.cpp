@@ -176,8 +176,9 @@ void SynEngine::ObjectManager::ProcessMaterials(Mesh* synMesh, aiMesh* mesh, aiM
 		fs::path texturePath = filePath.parent_path();
 		fs::path textureRelativePath(texturePathString.C_Str());
 		texturePath /= textureRelativePath;
+		fs::path absouletPath = fs::absolute(texturePath);
 
-		Texture* texture = Engine::I->textureManager->LoadTexture(texturePath.string().c_str());
+		Texture* texture = Engine::I->textureManager->LoadTexture(absouletPath.string().c_str());
 		texture->UploadTexture();
 
 		Material material(texture);

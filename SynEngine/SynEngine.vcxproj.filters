@@ -22,6 +22,7 @@
     <ClCompile Include="src\Util\OpenGL.cpp" />
     <ClCompile Include="src\Renderers\Containers\DefaultContainer.cpp" />
     <ClCompile Include="src\Core\Node.cpp" />
+    <ClCompile Include="src\Core\Pool.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\SynEngine\Core\Object.hpp" />
@@ -48,5 +49,6 @@
     <ClInclude Include="include\SynEngine\Util\OpenGL.hpp" />
     <ClInclude Include="include\SynEngine\Renderers\Containers\DefaultContainer.hpp" />
     <ClInclude Include="include\SynEngine\Core\Node.hpp" />
+    <ClInclude Include="include\SynEngine\Core\Pool.h" />
   </ItemGroup>
 </Project>

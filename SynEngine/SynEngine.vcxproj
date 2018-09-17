@@ -222,6 +222,7 @@
     <ClCompile Include="src\Core\Mesh.cpp" />
     <ClCompile Include="src\Core\Node.cpp" />
     <ClCompile Include="src\Core\Object.cpp" />
+    <ClCompile Include="src\Core\Pool.cpp" />
     <ClCompile Include="src\Core\Shader.cpp" />
     <ClCompile Include="src\Core\ShaderProgram.cpp" />
     <ClCompile Include="src\Core\Texture.cpp" />
@@ -245,6 +246,7 @@
     <ClInclude Include="include\SynEngine\Core\Mesh.hpp" />
     <ClInclude Include="include\SynEngine\Core\Node.hpp" />
     <ClInclude Include="include\SynEngine\Core\Object.hpp" />
+    <ClInclude Include="include\SynEngine\Core\Pool.h" />
     <ClInclude Include="include\SynEngine\Core\Shader.hpp" />
     <ClInclude Include="include\SynEngine\Core\ShaderProgram.hpp" />
     <ClInclude Include="include\SynEngine\Core\Texture.hpp" />

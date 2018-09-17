@@ -10,7 +10,7 @@ SynEngine::Texture::~Texture()
 	delete[] data;
 }
 
-void SynEngine::Texture::LoadTexture()
+void SynEngine::Texture::UploadTexture()
 {
 	glGenTextures(1, &id);
 	glActiveTexture(GL_TEXTURE0);

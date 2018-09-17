@@ -68,7 +68,10 @@ void SynEngine::Engine::Init()
 	shaderProgramManager = new SynEngine::ShaderProgramManager();
 	renderManager = new SynEngine::RenderManager();
 	log = new SynEngine::Log();
+
+	printf("OpenGL version: %s\n", glGetString(GL_VERSION));
 }
+
 
 SynEngine::Engine* SynEngine::Engine::I = new SynEngine::Engine();
 

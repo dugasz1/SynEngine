@@ -11,7 +11,8 @@ int main() {
 	SynEngine::Debug debuger;
 
 	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-	SynEngine::Object* o = SynEngine::Engine::I->objectManager->LoadObject("..\\Test\\models\\gun\\M1911_assembled.dae");
+	SynEngine::Object* o = SynEngine::Engine::I->objectManager->LoadObject("..\\Test\\models\\gun\\M1911.dae");
+	//SynEngine::Object* o = SynEngine::Engine::I->objectManager->LoadObject("..\\Test\\models\\wolf\\wolf.dae");
 
 	SynEngine::Engine::I->renderManager->dr->AddObject(o);
 

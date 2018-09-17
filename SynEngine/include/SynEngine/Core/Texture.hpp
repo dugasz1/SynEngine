@@ -23,7 +23,7 @@ namespace SynEngine {
 
 		//Temp 
 		GLuint id;
-		void LoadTexture();
+		void UploadTexture();
 	private:
 		
 	};

@@ -22,7 +22,7 @@ SynEngine::Object * SynEngine::ObjectManager::LoadObject(std::string path, unsig
 	char* fullPathC = new char[MAX_PATH];
 	std::wcstombs(fullPathC, fullPath, MAX_PATH);
 
-	printf("Loading object at: %ls\n", fullPath);
+	printf("Loading object: %ls\n", fullPath);
 	const aiScene* scene = aImporter.ReadFile(fullPathC, flags);
 	if (scene == nullptr) {
 		SynEngine::Engine::I->log->Error(aImporter.GetErrorString());
@@ -34,8 +34,7 @@ SynEngine::Object * SynEngine::ObjectManager::LoadObject(std::string path, unsig
 
 	printf("Number of meshes: %u\n", scene->mNumMeshes);
 	printf("Number of materials: %u\n", scene->mNumMaterials);
-	printf("Hierarchy count: %u\n", scene->mRootNode->mNumChildren);
-	std::cout << scene->mRootNode->mTransformation.IsIdentity() << std::endl;
+	std::cout << "Is root matrix identity: " << scene->mRootNode->mTransformation.IsIdentity() << std::endl;
 	
 	ProcessHierarchy(scene, obj, path);
 
@@ -70,7 +69,7 @@ void SynEngine::ObjectManager::ProcessHierarchyRecursively(Mat4 lastTranformatio
 	Mat4 nodeMatrix;
 	ProcessTransformationMatrix(&node->mTransformation, &nodeMatrix);
 	Mat4 currMatrix = lastTranformationM * nodeMatrix;
-	printf("--Number of meshed is in %s node: %u | Numof nodes: %u \n", node->mName.C_Str(), node->mNumMeshes, node->mNumChildren);
+	printf("--Number of meshes is in %s node: %u , Numof nodes: %u \n", node->mName.C_Str(), node->mNumMeshes, node->mNumChildren);
 
 	for (size_t i = 0; i < node->mNumMeshes; i++)
 	{
@@ -93,9 +92,8 @@ void SynEngine::ObjectManager::ProcessHierarchyRecursively(Mat4 lastTranformatio
 
 SynEngine::Mesh * SynEngine::ObjectManager::LoadMesh(aiMesh * mesh, aiMaterial** materials, std::string& filePathString)
 {
+	printf("Loading mesh: %s", mesh->mName.C_Str());
 	printf("UV channels: %u uv compinents: %u\n", mesh->GetNumUVChannels(), mesh->mNumUVComponents[0]);
-	
-	SynEngine::Engine::I->log->Info(mesh->mName.C_Str());
 	printf("Vertices count: %u\n", mesh->mNumVertices);
 
 	SynEngine::Mesh* synMesh = new SynEngine::Mesh();
@@ -180,7 +178,7 @@ void SynEngine::ObjectManager::ProcessMaterials(Mesh* synMesh, aiMesh* mesh, aiM
 		texturePath /= textureRelativePath;
 
 		Texture* texture = Engine::I->textureManager->LoadTexture(texturePath.string().c_str());
-		texture->LoadTexture();
+		texture->UploadTexture();
 
 		Material material(texture);
 

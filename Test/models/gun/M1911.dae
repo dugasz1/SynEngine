@@ -3,34 +3,13 @@
   <asset>
     <contributor>
       <author>Blender User</author>
-      <authoring_tool>Blender 2.79.0 commit date:2017-09-11, commit time:10:43, hash:5bd8ac9</authoring_tool>
+      <authoring_tool>Blender 2.79.0 commit date:2018-03-22, commit time:14:10, hash:f4dc9f9d68b</authoring_tool>
     </contributor>
-    <created>2018-05-01T18:08:56</created>
-    <modified>2018-05-01T18:08:56</modified>
+    <created>2018-09-16T16:28:44</created>
+    <modified>2018-09-16T16:28:44</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
-  <library_cameras>
-    <camera id="Camera-camera" name="Camera">
-      <optics>
-        <technique_common>
-          <perspective>
-            <xfov sid="xfov">49.13434</xfov>
-            <aspect_ratio>1.777778</aspect_ratio>
-            <znear sid="znear">0.1</znear>
-            <zfar sid="zfar">100</zfar>
-          </perspective>
-        </technique_common>
-      </optics>
-      <extra>
-        <technique profile="blender">
-          <shiftx sid="shiftx" type="float">0</shiftx>
-          <shifty sid="shifty" type="float">0</shifty>
-          <YF_dofdist sid="YF_dofdist" type="float">0</YF_dofdist>
-        </technique>
-      </extra>
-    </camera>
-  </library_cameras>
   <library_lights>
     <light id="Hemi-light" name="Hemi">
       <technique_common>
@@ -731,12 +710,8 @@
   <library_controllers/>
   <library_visual_scenes>
     <visual_scene id="Scene" name="Scene">
-      <node id="Camera" name="Camera" type="NODE">
-        <matrix sid="transform">-0.01664742 -0.1235263 0.9922016 22.43471 0.9998456 0.003519032 0.01721379 0.4343489 -0.005617946 0.9923351 0.1234487 7.672362 0 0 0 1</matrix>
-        <instance_camera url="#Camera-camera"/>
-      </node>
       <node id="Hand" name="Hand" type="NODE">
-        <matrix sid="transform">0.5649408 0 0 0.007372916 0 1 0 -3.293371 0 0 1 3.039422 0 0 0 1</matrix>
+        <matrix sid="transform">0.2203316 0 0 0.416399 0 0.3900083 0 -0.3847363 0 0 0.3900083 0.1305259 0 0 0 1</matrix>
         <instance_geometry url="#Cube_001-mesh" name="Hand">
           <bind_material>
             <technique_common>
@@ -746,7 +721,7 @@
         </instance_geometry>
       </node>
       <node id="Top" name="Top" type="NODE">
-        <matrix sid="transform">0.4926348 0 0 0.01849689 0 1 0 -0.2523293 0 0 1 6.65279 0 0 0 1</matrix>
+        <matrix sid="transform">0.1921316 0 0 0.4207377 0 0.3900083 0 0.801295 0 0 0.3900083 0.670702 0 0 0 1</matrix>
         <instance_geometry url="#Plane_001-mesh" name="Top">
           <bind_material>
             <technique_common>
@@ -756,7 +731,7 @@
         </instance_geometry>
       </node>
       <node id="Barell" name="Barell" type="NODE">
-        <matrix sid="transform">0.3876066 0 0 0.01580879 0 0.6955354 0 0.1454215 0 0 1 7.976855 0 0 0 1</matrix>
+        <matrix sid="transform">0.1511698 0 0 0.4196897 0 0.2712646 0 0.9564213 0 0 0.3900083 2.056166 0 0 0 1</matrix>
         <instance_geometry url="#Plane_003-mesh" name="Barell">
           <bind_material>
             <technique_common>
@@ -766,7 +741,7 @@
         </instance_geometry>
       </node>
       <node id="Trigger" name="Trigger" type="NODE">
-        <matrix sid="transform">0.5530245 0 -2.22045e-16 0.00322926 0 1.26396e-8 1 -0.8195794 0 -0.1674165 7.54979e-8 5.374197 0 0 0 1</matrix>
+        <matrix sid="transform">0.2156841 0 0 0.414783 0 4.92955e-9 0.3900083 0.5800629 0 -0.06529384 2.94448e-8 1.041108 0 0 0 1</matrix>
         <instance_geometry url="#Plane-mesh" name="Trigger">
           <bind_material>
             <technique_common>
@@ -776,7 +751,7 @@
         </instance_geometry>
       </node>
       <node id="Kakas" name="Kakas" type="NODE">
-        <matrix sid="transform">-0.1485346 0 0 0.004246711 0 0.06571227 0 -4.894117 0 0 1 7.914493 0 0 0 1</matrix>
+        <matrix sid="transform">-0.05792972 0 0 0.4151802 0 0.02562833 0 -1.009041 0 0 0.3900083 2.031844 0 0 0 1</matrix>
         <instance_geometry url="#Plane_004-mesh" name="Kakas">
           <bind_material>
             <technique_common>
@@ -786,7 +761,7 @@
         </instance_geometry>
       </node>
       <node id="Magazin" name="Magazin" type="NODE">
-        <matrix sid="transform">0.6714718 0 0 0.004246708 0 0.9944562 -0.1051514 1.271318 0 0.1051514 0.9944562 1.69776 0 0 0 1</matrix>
+        <matrix sid="transform">0.2618796 0 0 0.4151802 0 0.3878462 -0.04100991 -1.260183 0 0.04100991 0.3878462 -0.3927335 0 0 0 1</matrix>
         <instance_geometry url="#Cube-mesh" name="Magazin">
           <bind_material>
             <technique_common>
@@ -796,7 +771,7 @@
         </instance_geometry>
       </node>
       <node id="Bullet" name="Bullet" type="NODE">
-        <matrix sid="transform">0.2289152 0 0 0.008086469 0 0.4801028 0.00781359 8.049283 0 -0.02023779 0.1853625 7.740969 0 0 0 1</matrix>
+        <matrix sid="transform">0.08927883 0 0 0.4166775 0 0.1872441 0.003047365 4.038993 0 -0.007892905 0.07229291 1.964169 0 0 0 1</matrix>
         <instance_geometry url="#Cube_003-mesh" name="Bullet">
           <bind_material>
             <technique_common>
@@ -806,7 +781,7 @@
         </instance_geometry>
       </node>
       <node id="Hemi" name="Hemi" type="NODE">
-        <matrix sid="transform">1 0 0 16.16984 0 1 0 -13.2905 0 0 1 12.09965 0 0 0 1</matrix>
+        <matrix sid="transform">0.3900083 0 0 6.719895 0 0.3900083 0 -4.283698 0 0 0.3900083 3.664091 0 0 0 1</matrix>
         <instance_light url="#Hemi-light"/>
       </node>
     </visual_scene>
